@@ -48,14 +48,14 @@ public class MainActivity extends Activity {
 		mImageView = (ImageView) findViewById(R.id.imageView1);
 		new Handler().postDelayed(new Runnable() 
 		{  
-            public void run() 
-            {  
-            	mImageView.setImageBitmap(null);
-                mImageView.destroyDrawingCache(); 
-                mWebView.invalidate();
-            }  
+	            public void run() 
+	            {  
+	            	mImageView.setImageBitmap(null);
+	                mImageView.destroyDrawingCache(); 
+	                mWebView.invalidate();
+	            }  
   
-        }, 3000); 
+        	}, 3000); 
 		
 		//load cookie
 		String cookies = null;
@@ -70,21 +70,21 @@ public class MainActivity extends Activity {
 			byte[] bytes = new byte[1024];  
 	        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();  
 	        try {
-				while (inStream.read(bytes) != -1) {  
-				    arrayOutputStream.write(bytes, 0, bytes.length);  
-				}
+			while (inStream.read(bytes) != -1) {  
+				arrayOutputStream.write(bytes, 0, bytes.length);  
+			}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}  
 	        try {
-				inStream.close();
-				arrayOutputStream.close();
+			inStream.close();
+			arrayOutputStream.close();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	        cookies = new String(arrayOutputStream.toByteArray()); 
+	        	cookies = new String(arrayOutputStream.toByteArray()); 
 		}
         
 		//set cookie
@@ -109,8 +109,8 @@ public class MainActivity extends Activity {
 			}
 			
 			@Override
-            public void onPageFinished(WebView view, String url)
-            {
+            		public void onPageFinished(WebView view, String url)
+            		{
 				CookieSyncManager cookieSyncManager = CookieSyncManager.createInstance(MainActivity.this);
 				cookieSyncManager.sync();
 				CookieManager cookieManager = CookieManager.getInstance();
@@ -133,17 +133,17 @@ public class MainActivity extends Activity {
 				}
 				
 				progressBar.hide();
-            }
+            		}
             
-            @Override
-            public void onReceivedError(WebView view, int errorCode,  
-                    String description, String failingUrl) {  
-                // TODO Auto-generated method stub  
-                Toast.makeText(MainActivity.this, "Oh no! " + description, Toast.LENGTH_SHORT).show(); 
-            }  
-        });
-		mWebView.loadUrl(url);
-	}
+            		@Override
+            		public void onReceivedError(WebView view, int errorCode,  
+                    		String description, String failingUrl) {  
+                		// TODO Auto-generated method stub  
+                		Toast.makeText(MainActivity.this, "Oh no! " + description, Toast.LENGTH_SHORT).show(); 
+            		}  
+        		});
+			mWebView.loadUrl(url);
+		}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
