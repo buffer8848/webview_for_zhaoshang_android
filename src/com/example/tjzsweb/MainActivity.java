@@ -33,6 +33,7 @@ import android.widget.ImageView;
 public class MainActivity extends Activity {
 	private String url = "http://www.zhaoshang.net/m/redirect.php";
 	private String cookiefile = "cookie.data";
+	private boolean ready = false;
 	
 	private WebView mWebView; 
 	private ImageView mImageView;
@@ -53,6 +54,7 @@ public class MainActivity extends Activity {
 	            	mImageView.setImageBitmap(null);
 	                mImageView.destroyDrawingCache(); 
 	                mWebView.invalidate();
+	                ready = true;
 	            }  
   
         	}, 3000); 
@@ -60,31 +62,40 @@ public class MainActivity extends Activity {
 		//load cookie
 		String cookies = null;
 		FileInputStream inStream = null;
-		try {
+		try 
+		{
 			inStream = getBaseContext().openFileInput(cookiefile);
-		} catch (FileNotFoundException e1) {
+		} catch (FileNotFoundException e1) 
+		{
 			e1.printStackTrace();
 		}
+		
 		if (inStream != null)
 		{
 			byte[] bytes = new byte[1024];  
 	        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();  
-	        try {
-			while (inStream.read(bytes) != -1) {  
-				arrayOutputStream.write(bytes, 0, bytes.length);  
-			}
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}  
-	        try {
-			inStream.close();
-			arrayOutputStream.close();
-			} catch (IOException e1) {
+	        try 
+	        {
+				while (inStream.read(bytes) != -1) 
+				{  
+					arrayOutputStream.write(bytes, 0, bytes.length);  
+				}
+			} catch (IOException e1) 
+			{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	        	cookies = new String(arrayOutputStream.toByteArray()); 
+	        
+	        try 
+	        {
+	        	inStream.close();
+	        	arrayOutputStream.close();
+			} catch (IOException e1) 
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	        cookies = new String(arrayOutputStream.toByteArray()); 
 		}
         
 		//set cookie
@@ -94,68 +105,80 @@ public class MainActivity extends Activity {
 		cookieManager.setCookie(url, cookies);
 		CookieSyncManager.getInstance().sync();
 		
+		progressBar = new ProgressDialog(this);
+		
 		//load url
 		mWebView = (WebView) findViewById(R.id.webView1);  
 		mWebView.getSettings().setJavaScriptEnabled(true); 
 		mWebView.getSettings().setBuiltInZoomControls(true);
 		mWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY); 
-		
-		progressBar = ProgressDialog.show(this, null, "Loading..."); 
-		
-		mWebView.setWebViewClient(new WebViewClient(){
+		mWebView.setWebViewClient(new WebViewClient()
+		{
 			@Override
-			public void onPageStarted(WebView view, String url, Bitmap favicon) {
-				progressBar.show();
+			public void onPageStarted(WebView view, String url, Bitmap favicon) 
+			{
+				if (ready)
+					progressBar.show();
 			}
 			
-			@Override
-            		public void onPageFinished(WebView view, String url)
-            		{
+			@Override		
+			public void onPageFinished(WebView view, String url)
+            {
 				CookieSyncManager cookieSyncManager = CookieSyncManager.createInstance(MainActivity.this);
 				cookieSyncManager.sync();
 				CookieManager cookieManager = CookieManager.getInstance();
 				cookieManager.setAcceptCookie(true);
 				FileOutputStream outStream = null;
-				try {
+				try 
+				{
 					getBaseContext();
 					outStream = openFileOutput(cookiefile, Context.MODE_PRIVATE);
-				} catch (FileNotFoundException e) {
+				} catch (FileNotFoundException e) 
+				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					return;
 				}
-				try {
+				
+				try 
+				{
 					if (cookieManager.getCookie(url) != null)
 						outStream.write(cookieManager.getCookie(url).getBytes());
 					outStream.close();
-				} catch (IOException e) {
+				} catch (IOException e) 
+				{
 					e.printStackTrace();
 				}
 				
 				progressBar.hide();
-            		}
-            
-            		@Override
-            		public void onReceivedError(WebView view, int errorCode,  
-                    		String description, String failingUrl) {  
-                		// TODO Auto-generated method stub  
-                		Toast.makeText(MainActivity.this, "Oh no! " + description, Toast.LENGTH_SHORT).show(); 
-            		}  
-        		});
-			mWebView.loadUrl(url);
-		}
+            		
+            }
+            	
+			@Override		
+			public void onReceivedError(WebView view, int errorCode,  String description, String failingUrl)	
+			{  
+                // TODO Auto-generated method stub  
+                Toast.makeText(MainActivity.this, "Oh no! " + description, Toast.LENGTH_SHORT).show(); 
+			}  
+		});
+		
+		mWebView.loadUrl(url);
+	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
 	@Override 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {  
+    public boolean onKeyDown(int keyCode, KeyEvent event) 
+	{  
         // TODO Auto-generated method stub  
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {  
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) 
+        {  
         	mWebView.goBack();  
             return true;  
         }  
