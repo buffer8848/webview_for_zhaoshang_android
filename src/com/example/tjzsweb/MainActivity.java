@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	        cookies = new String(arrayOutputStream.toByteArray()); 
+	        	cookies = new String(arrayOutputStream.toByteArray()); 
 		}
         
 		//set cookie
@@ -123,7 +123,7 @@ public class MainActivity extends Activity {
 			
 			@Override		
 			public void onPageFinished(WebView view, String url)
-            {
+            		{
 				CookieSyncManager cookieSyncManager = CookieSyncManager.createInstance(MainActivity.this);
 				cookieSyncManager.sync();
 				CookieManager cookieManager = CookieManager.getInstance();
@@ -152,13 +152,13 @@ public class MainActivity extends Activity {
 				
 				progressBar.hide();
             		
-            }
+            		}
             	
 			@Override		
 			public void onReceivedError(WebView view, int errorCode,  String description, String failingUrl)	
 			{  
-                // TODO Auto-generated method stub  
-                Toast.makeText(MainActivity.this, "Oh no! " + description, Toast.LENGTH_SHORT).show(); 
+                		// TODO Auto-generated method stub  
+                		Toast.makeText(MainActivity.this, "Oh no! " + description, Toast.LENGTH_SHORT).show(); 
 			}  
 		});
 		
@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
 	}
 	
 	@Override 
-    public boolean onKeyDown(int keyCode, KeyEvent event) 
+    	public boolean onKeyDown(int keyCode, KeyEvent event) 
 	{  
         // TODO Auto-generated method stub  
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) 
