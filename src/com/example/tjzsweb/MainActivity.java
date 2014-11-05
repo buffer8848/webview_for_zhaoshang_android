@@ -123,7 +123,7 @@ public class MainActivity extends Activity {
 			
 			@Override		
 			public void onPageFinished(WebView view, String url)
-            		{
+            {
 				CookieSyncManager cookieSyncManager = CookieSyncManager.createInstance(MainActivity.this);
 				cookieSyncManager.sync();
 				CookieManager cookieManager = CookieManager.getInstance();
@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
 			public void onReceivedError(WebView view, int errorCode,  String description, String failingUrl)	
 			{  
                 		// TODO Auto-generated method stub  
-                		Toast.makeText(MainActivity.this, "Oh no! " + description, Toast.LENGTH_SHORT).show(); 
+                		Toast.makeText(MainActivity.this,  description, Toast.LENGTH_SHORT).show(); 
 			}  
 		});
 		
