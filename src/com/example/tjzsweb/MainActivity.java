@@ -31,7 +31,7 @@ import android.widget.ImageView;
 
 
 public class MainActivity extends Activity {
-	private String url = "http://beichen.zhaoshang.pw";
+	private String url = "http://ecp.zhaoshang.pw";
 	private String cookiefile = "cookie.data";
 	private boolean ready = false;
 	
