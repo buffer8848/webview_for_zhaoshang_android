@@ -1,4 +1,4 @@
-package com.example.lqzpms;
+package com.example.zhangpupms;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.example.lqzpms.R;
+import com.example.zhangpupms.R;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +33,7 @@ import android.widget.ImageView;
 
 
 public class MainActivity extends Activity {
-	private String url = "http://lqz.zhaoshang.pw";
+	private String url = "http://zhangpu.zhaoshang.pw";
 	private String cookiefile = "cookie.data";
 	private boolean ready = false;
 	
