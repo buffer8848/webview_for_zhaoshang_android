@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -112,8 +113,18 @@ public class MainActivity extends Activity {
 		mWebView.getSettings().setJavaScriptEnabled(true); 
 		mWebView.getSettings().setBuiltInZoomControls(true);
 		mWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY); 
-		mWebView.setWebViewClient(new WebViewClient()
-		{
+		mWebView.setWebViewClient(new WebViewClient() {
+			public boolean shouldOverrideUrlLoading(WebView view,String url){    
+                //当有新连接时，使用当前的 WebView    
+                view.loadUrl(url);  
+                //调用拨号程序  
+                if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {  
+                  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
+                   startActivity(intent);  
+                  }  
+                return true;    
+            }
+			
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) 
 			{
@@ -152,13 +163,13 @@ public class MainActivity extends Activity {
 				
 				progressBar.hide();
             		
-            		}
+            }
             	
 			@Override		
 			public void onReceivedError(WebView view, int errorCode,  String description, String failingUrl)	
 			{  
                 		// TODO Auto-generated method stub  
-                		Toast.makeText(MainActivity.this,  description, Toast.LENGTH_SHORT).show(); 
+                Toast.makeText(MainActivity.this,  description, Toast.LENGTH_SHORT).show(); 
 			}  
 		});
 		
