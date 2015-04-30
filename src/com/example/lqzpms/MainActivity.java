@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import com.example.lqzpms.R;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -116,6 +117,18 @@ public class MainActivity extends Activity {
 		mWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY); 
 		mWebView.setWebViewClient(new WebViewClient()
 		{
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view,String url){    
+				//当有新连接时，使用当前的 WebView    
+				view.loadUrl(url);  
+				//调用拨号程序  
+				if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {  
+				  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
+				   startActivity(intent);  
+				  }  
+				return true;    
+			}
+			
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) 
 			{
