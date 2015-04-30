@@ -114,6 +114,7 @@ public class MainActivity extends Activity {
 		mWebView.getSettings().setBuiltInZoomControls(true);
 		mWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY); 
 		mWebView.setWebViewClient(new WebViewClient() {
+			@Override
 			public boolean shouldOverrideUrlLoading(WebView view,String url){    
                 //当有新连接时，使用当前的 WebView    
                 view.loadUrl(url);  
