@@ -32,7 +32,7 @@ import android.widget.ImageView;
 
 
 public class MainActivity extends Activity {
-	private String url = "http://pms.zhaoshang.net";
+	private String url = "http://lqz.zhaoshang.pw";
 	private String cookiefile = "cookie.data";
 	private boolean ready = false;
 	
