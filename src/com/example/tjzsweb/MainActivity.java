@@ -5,30 +5,24 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
+import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.View;
 import android.view.Window;
-
-import android.view.KeyEvent;  
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
-import android.webkit.WebView;  
-import android.webkit.WebViewClient;  
-import android.widget.Toast;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -117,62 +111,14 @@ public class MainActivity extends Activity {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view,String url){    
                 //当有新连接时，使用当前的 WebView    
-                view.loadUrl(url);  
+                //view.loadUrl(url);  
                 //调用拨号程序  
                 if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {  
-                  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
-                   startActivity(intent);  
-                  }  
+                	Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
+                	startActivity(intent);  
+                }  
                 return true;    
             }
-			
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view,String url){    
-				//当有新连接时，使用当前的 WebView    
-				view.loadUrl(url);  
-				//调用拨号程序  
-				if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {  
-				  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
-				   startActivity(intent);  
-				  }  
-				return true;    
-			}
-			
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view,String url){    
-				//当有新连接时，使用当前的 WebView    
-				view.loadUrl(url);  
-				//调用拨号程序  
-				if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {  
-				  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
-				   startActivity(intent);  
-				  }  
-				return true;    
-			}
-			
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view,String url){    
-				//当有新连接时，使用当前的 WebView    
-				view.loadUrl(url);  
-				//调用拨号程序  
-				if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {  
-				  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
-				   startActivity(intent);  
-				  }  
-				return true;    
-			}
-			
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view,String url){    
-				//当有新连接时，使用当前的 WebView    
-				view.loadUrl(url);  
-				//调用拨号程序  
-				if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {  
-				  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
-				   startActivity(intent);  
-				  }  
-				return true;    
-			}
 			
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) 
@@ -210,15 +156,13 @@ public class MainActivity extends Activity {
 					e.printStackTrace();
 				}
 				
-				progressBar.hide();
-            		
+				progressBar.hide();	
             }
             	
 			@Override		
-			public void onReceivedError(WebView view, int errorCode,  String description, String failingUrl)	
-			{  
-                		// TODO Auto-generated method stub  
-                Toast.makeText(MainActivity.this,  description, Toast.LENGTH_SHORT).show(); 
+			public void onReceivedError(WebView view, int errorCode,  String description, String failingUrl){  
+                // TODO Auto-generated method stub  
+				Toast.makeText(MainActivity.this,  description, Toast.LENGTH_SHORT).show();
 			}  
 		});
 		
@@ -234,7 +178,7 @@ public class MainActivity extends Activity {
 	}
 	
 	@Override 
-    	public boolean onKeyDown(int keyCode, KeyEvent event) 
+    public boolean onKeyDown(int keyCode, KeyEvent event) 
 	{  
         // TODO Auto-generated method stub  
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) 
