@@ -1,40 +1,32 @@
-package com.example.lqzpms;
+package com.example.zhongbeipms;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import com.example.lqzpms.R;
-
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
+import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.View;
 import android.view.Window;
-
-import android.view.KeyEvent;  
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
-import android.webkit.WebView;  
-import android.webkit.WebViewClient;  
-import android.widget.Toast;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
-	private String url = "http://lqz.zhaoshang.pw";
+	private String url = "http://zhongbei.zhaoshang.pw";
 	private String cookiefile = "cookie.data";
 	private boolean ready = false;
 	
@@ -120,7 +112,7 @@ public class MainActivity extends Activity {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view,String url){    
 				//当有新连接时，使用当前的 WebView    
-				view.loadUrl(url);  
+				//view.loadUrl(url);  
 				//调用拨号程序  
 				if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {  
 				  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
