@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
-	private String url = "http://lqz.zhaoshang.pw";
+	private String url = "http://pms.zhaoshang.net";
 	private String cookiefile = "cookie.data";
 	private boolean ready = false;
 	
