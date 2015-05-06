@@ -111,7 +111,7 @@ public class MainActivity extends Activity {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view,String url){     
 				//当有新连接时，使用当前的 WebView    
-                view.loadUrl(url);
+                //view.loadUrl(url);
 				//调用拨号程序  
                 if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {  
                 	Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
